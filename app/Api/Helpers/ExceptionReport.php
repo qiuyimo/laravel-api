@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Access\AuthorizationException;
-use Tymon\JWTAuth\Exceptions\TokenInvalidException;
+// use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
@@ -53,7 +53,7 @@ class ExceptionReport
         AuthorizationException::class => ['没有此权限',403],
         ValidationException::class => [],
         UnauthorizedHttpException::class=>['未登录或登录状态失效',422],
-        TokenInvalidException::class=>['token不正确',400],
+        // TokenInvalidException::class=>['token不正确',400],
         NotFoundHttpException::class=>['没有找到该页面',404],
         MethodNotAllowedHttpException::class=>['访问方式不正确',405],
         QueryException::class=>['参数错误',401],
