@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
@@ -16,7 +15,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::paginate(3);
-        return $users;
+        return $this->success($users);
     }
 
     /**
@@ -27,7 +26,7 @@ class UserController extends Controller
      * @return User
      */
     public function show(User $user){
-        return $user;
+        return $this->success($user);
     }
 
     /**
@@ -39,7 +38,7 @@ class UserController extends Controller
     {
         User::create(request()->all());
 
-        return '用户注册成功。。。';
+        return $this->setStatusCode(201)->success('用户创建成功');
     }
 
     /**
@@ -54,8 +53,8 @@ class UserController extends Controller
         $res = Auth::guard('web')->attempt(['name'=>$request->name,'password'=>$request->password]);
 
         if($res){
-            return '用户登录成功...';
+            return $this->success('用户登录成功');
         }
-        return '用户登录失败';
+        return $this->failed('用户登录失败', 401);
     }
 }
