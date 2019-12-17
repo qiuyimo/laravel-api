@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\Api\UserResource;
 
 class UserController extends Controller
 {
@@ -15,7 +16,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::paginate(3);
-        return $this->success($users);
+        return UserResource::collection($users);
     }
 
     /**
@@ -26,7 +27,7 @@ class UserController extends Controller
      * @return User
      */
     public function show(User $user){
-        return $this->success($user);
+        return $this->success(new UserResource($user));
     }
 
     /**
